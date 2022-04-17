@@ -72,6 +72,8 @@ var questionIndex = 0;
 
 
 
+
+
 // start quiz function, should include an event listener
 
 var startQuiz = function () {
@@ -118,44 +120,42 @@ var renderQuestions = function () {
         infoEl.appendChild(answerButtonEL);
         answerButtonEL.addEventListener('click', function () {
             console.log('test');
-            if (questionIndex >= questions.length) {
-                // All done will append last page with user stats
-                createDiv.textContent = "End of quiz!" + " " + "You got  " + score + "/" + questions.length + " Correct!";
-            } else {
+            // checkCorrectAnswer();
+            for (let i = 0; i < answers.length; index++) {
+                var rightAnswer = questions[questionIndex].correctAnswer;
+                console.log(correctAnswer);
+                if (question.answer === correctAnswer) {
+                    btnCorrect = true;
+                    msgEl.style.color = "green";
+                    numberCorrectAnswers++;
+
+                } else if (question.answer != correctAnswer) {
+                    msgEl.style.color = "red";
+                    secondsLeft -= 15;
+                    checkTimeRemaining();
+                }
+
                 questionIndex++;
                 renderQuestions();
+
             }
 
+        })
+    };
 
-
-
-            // if (answerButtonEL.matches('li')) {
-            //     //which button did they click
-            //     // console.log("button clicked: " + element.id);
-            //     // alert("You clicked the "+element.getAttribute("data-answered")+" answer");
-            //     console.log(answerButtonEL);
-            //     msgEl.textContent = element.getAttribute('data-answered');
-            //     msgEl.style.color = 'red';
-            //     // console.log(msgEl);
-            //     if (answerButtonEL.getAttribute('data-answered') === 'Correct') {
-            //         btnCorrect = true;
-            //         msgEl.style.color = 'green';
-            //         numberCorrectAnswers++;
-            //     } else {
-            //         // incorrect answer, penalize them 15 second
-            //         secondsLeft -= 15;
-            //         checkTimeRemaining();
-            //     }
-            //     // alert("loading next question idxQuestion is"+idxQuestion);
-            //     // load the next question
-            //     questionIndex++;
-            //     renderQuestions();
-            // }
-        });
-    }
     // debugger;
     //   answerButtonEL.addEventListener(click, compare);
 };
+
+// var checkCorrectAnswer = function () {
+//     console.log("test2");
+//     msgEl.setAttribute("data-answered", "Incorrect");
+//     switch (correctAnswer) {
+//         case 0:
+//             msgEl.setAttribute("data-answered", "Correct");
+//             break;
+//     }
+// };
 
 
 
@@ -176,10 +176,21 @@ var setTime = function () {
 
 var checkTimeRemaining = function () {
     if (secondsLeft <= 0 || btnFinalQuestion) {
-        disableQuiz();
+        endQuiz();
         clearInterval(timerInterval);
 
         displayScores();
+    }
+
+};
+var endQuiz = function () {
+    if (questionIndex >= questions.length) {
+        // All done will append last page with user stats
+
+        createDiv.textContent = "End of quiz!" + " " + "You got  " + score + "/" + questions.length + " Correct!";
+    } else {
+        questionIndex++;
+        renderQuestions();
     }
 
 };
@@ -235,7 +246,7 @@ setTime();
 
 
 //     // else if for incorrect answer clicked
-// });
+// 
 // //next button that I did not add
 // document.querySelector("#next").addEventListener("click", function (event) {
 //     event.preventDefault();
@@ -243,4 +254,4 @@ setTime();
 
 //     renderQuestions()
 
-// });
+//
