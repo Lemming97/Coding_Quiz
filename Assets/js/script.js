@@ -64,11 +64,12 @@ var checkElement = document.querySelector(".check-answer");
 var numberCorrectAnswers = 0;
 var numberTotalQuestions = 0;
 var finalScore = 0;
+var btnCorrect = false;
+var btnFinalQuestion = false;
 
 //question Index
 var questionIndex = 0;
-var blnCorrect = false;
-var blnFinalQuestion = false;
+
 
 
 // start quiz function, should include an event listener
@@ -141,7 +142,7 @@ var renderQuestions = function () {
         msgEl.style.color = "red";
         // console.log(msgEl);
         if (answerButtonEL.getAttribute("data-answered") === "Correct") {
-            blnCorrect = true;
+            btnCorrect = true;
             msgEl.style.color = "green";
             numberCorrectAnswers++;
         } else {
@@ -172,7 +173,7 @@ var setTime = function () {
 };
 
 var checkTimeRemaining = function () {
-    if (secondsLeft <= 0 || blnFinalQuestion) {
+    if (secondsLeft <= 0 || btnFinalQuestion) {
         disableQuiz();
         clearInterval(timerInterval);
 
