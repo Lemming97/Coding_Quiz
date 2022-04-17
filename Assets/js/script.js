@@ -86,77 +86,68 @@ var startQuiz = function () {
     startButtonEl.addEventListener("click", renderQuestions);
 
 };
-
-
-
-
-
-//present questions function 
-
-
+//render questions
 var renderQuestions = function () {
-
-
     // for (let i = 0; i < questions.length; i++) { // this runs once
-    var intoTextEL = document.querySelector(".intoText");
-    intoTextEL.style.display = "none";
+    var intoTextEL = document.querySelector('.intoText');
+    intoTextEL.style.display = 'none';
     var question = questions[questionIndex];
 
-
-
-    var h2El = document.createElement("h2");
+    var h2El = document.createElement('h2');
     h2El.textContent = question.title;
     document.body.appendChild(h2El);
-    answersEL = document.createElement("ol");
-    answersEL.className = "answers";
+    answersEL = document.createElement('ol');
+    answersEL.className = 'answers';
     document.body.appendChild(answersEL);
 
-
-
-    for (let i = 0; i < question.answers.length; i++) { //single question in the for loop, this runs twice because we have 2 objects in the 1 array
+    for (let i = 0; i < question.answers.length; i++) {
+        //single question in the for loop, this runs twice because we have 2 objects in the 1 array
         var answer = question.answers[i];
 
+        var infoEl = document.createElement('li');
 
-        var infoEl = document.createElement("li");
-
-        infoEl.setAttribute("data-index", i);
+        infoEl.setAttribute('data-index', i);
 
         //buttons for answers
         infoEl.textContent = answer;
         document.body.appendChild(infoEl);
-        var answerButtonEL = document.createElement("button");
-        answerButtonEL.textContent = "Select";
-        answerButtonEL.className = "answer-btn";
-        answerButtonEL.style.margin = "12px";
+        var answerButtonEL = document.createElement('button');
+        answerButtonEL.textContent = 'Select';
+        answerButtonEL.className = 'answer-btn';
+        answerButtonEL.style.margin = '12px';
         infoEl.appendChild(answerButtonEL);
+        answerButtonEL.addEventListener('click', function () {
+            console.log('test');
+            if (answerButtonEL.matches('li')) {
+                //which button did they click
+                // console.log("button clicked: " + element.id);
+                // alert("You clicked the "+element.getAttribute("data-answered")+" answer");
+                console.log(answerButtonEL);
+                msgEl.textContent = element.getAttribute('data-answered');
+                msgEl.style.color = 'red';
+                // console.log(msgEl);
+                if (answerButtonEL.getAttribute('data-answered') === 'Correct') {
+                    btnCorrect = true;
+                    msgEl.style.color = 'green';
+                    numberCorrectAnswers++;
+                } else {
+                    // incorrect answer, penalize them 15 second
+                    secondsLeft -= 15;
+                    checkTimeRemaining();
+                }
+                // alert("loading next question idxQuestion is"+idxQuestion);
+                // load the next question
+                questionIndex++;
+                renderQuestions();
+            }
+        });
     }
     // debugger;
-    answerButtonEL.addEventListener(click, (compare));
-    console.log("test");
-    if (answerButtonEL.matches("li")) {
-        //which button did they click
-        // console.log("button clicked: " + element.id);
-        // alert("You clicked the "+element.getAttribute("data-answered")+" answer");
-        console.log(answerButtonEL);
-        msgEl.textContent = element.getAttribute("data-answered");
-        msgEl.style.color = "red";
-        // console.log(msgEl);
-        if (answerButtonEL.getAttribute("data-answered") === "Correct") {
-            btnCorrect = true;
-            msgEl.style.color = "green";
-            numberCorrectAnswers++;
-        } else {
-            // incorrect answer, penalize them 15 second
-            secondsLeft -= 15;
-            checkTimeRemaining();
-
-        }
-        // alert("loading next question idxQuestion is"+idxQuestion);
-        // load the next question
-        questionIndex++;
-        renderQuestions();
-    }
+    //   answerButtonEL.addEventListener(click, compare);
 };
+
+
+
 
 var setTime = function () {
     timerInterval = setInterval(function () {
@@ -182,6 +173,25 @@ var checkTimeRemaining = function () {
 
 };
 var displayScores = function () {
+    document.querySelector("#msgQuizDone").textContent = "All done!";
+    if (!secondsLeft > 0) {
+        secondsLeft = 0;
+    }
+
+    // var finalscore = 0;
+    // had scope issues, made global for now
+    finalscore = 0;
+    if (numCorrectAnswers > 0) {
+
+        finalscore = Math.round(100 * (numberCorrectAnswers / numberTotalQuestions) + (0.2 * secondsLeft));
+        if (finalscore > 100) {
+            finalscore = 100;
+        }
+    }
+    console.log("note: Total questions= " + numberTotalQuestions + "\n correct answers= " + numberCorrectAnswers + "\n seconds left= " + secondsLeft + "\n final score= " + finalscore);
+
+    document.querySelector("#msgScore").textContent = "Your final score is " + finalscore;
+
 
 };
 
