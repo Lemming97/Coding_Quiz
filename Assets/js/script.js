@@ -118,28 +118,39 @@ var renderQuestions = function () {
         infoEl.appendChild(answerButtonEL);
         answerButtonEL.addEventListener('click', function () {
             console.log('test');
-            if (answerButtonEL.matches('li')) {
-                //which button did they click
-                // console.log("button clicked: " + element.id);
-                // alert("You clicked the "+element.getAttribute("data-answered")+" answer");
-                console.log(answerButtonEL);
-                msgEl.textContent = element.getAttribute('data-answered');
-                msgEl.style.color = 'red';
-                // console.log(msgEl);
-                if (answerButtonEL.getAttribute('data-answered') === 'Correct') {
-                    btnCorrect = true;
-                    msgEl.style.color = 'green';
-                    numberCorrectAnswers++;
-                } else {
-                    // incorrect answer, penalize them 15 second
-                    secondsLeft -= 15;
-                    checkTimeRemaining();
-                }
-                // alert("loading next question idxQuestion is"+idxQuestion);
-                // load the next question
+            if (questionIndex >= questions.length) {
+                // All done will append last page with user stats
+                createDiv.textContent = "End of quiz!" + " " + "You got  " + score + "/" + questions.length + " Correct!";
+            } else {
                 questionIndex++;
                 renderQuestions();
             }
+
+
+
+
+            // if (answerButtonEL.matches('li')) {
+            //     //which button did they click
+            //     // console.log("button clicked: " + element.id);
+            //     // alert("You clicked the "+element.getAttribute("data-answered")+" answer");
+            //     console.log(answerButtonEL);
+            //     msgEl.textContent = element.getAttribute('data-answered');
+            //     msgEl.style.color = 'red';
+            //     // console.log(msgEl);
+            //     if (answerButtonEL.getAttribute('data-answered') === 'Correct') {
+            //         btnCorrect = true;
+            //         msgEl.style.color = 'green';
+            //         numberCorrectAnswers++;
+            //     } else {
+            //         // incorrect answer, penalize them 15 second
+            //         secondsLeft -= 15;
+            //         checkTimeRemaining();
+            //     }
+            //     // alert("loading next question idxQuestion is"+idxQuestion);
+            //     // load the next question
+            //     questionIndex++;
+            //     renderQuestions();
+            // }
         });
     }
     // debugger;
