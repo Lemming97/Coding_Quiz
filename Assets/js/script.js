@@ -127,34 +127,33 @@ var renderQuestions = function () {
         answerButtonEL.className = "answer-btn";
         answerButtonEL.style.margin = "12px";
         infoEl.appendChild(answerButtonEL);
-    };
+    }
     // debugger;
-    document.querySelector("#answers").addEventListener("click", function (event) {
-        console.log("test");
-        if (answerButtonEL.matches("li")) {
-            //which button did they click
-            // console.log("button clicked: " + element.id);
-            // alert("You clicked the "+element.getAttribute("data-answered")+" answer");
-            console.log(answerButtonEL);
-            msgEl.textContent = element.getAttribute("data-answered");
-            msgEl.style.color = "red";
-            // console.log(msgEl);
-            if (answerButtonEL.getAttribute("data-answered") === "Correct") {
-                blnCorrect = true;
-                msgEl.style.color = "green";
-                numberCorrectAnswers++;
-            } else {
-                // incorrect answer, penalize them 15 second
-                secondsLeft -= 15;
-                checkTimeRemaining();
+    answerButtonEL.addEventListener(click, (compare));
+    console.log("test");
+    if (answerButtonEL.matches("li")) {
+        //which button did they click
+        // console.log("button clicked: " + element.id);
+        // alert("You clicked the "+element.getAttribute("data-answered")+" answer");
+        console.log(answerButtonEL);
+        msgEl.textContent = element.getAttribute("data-answered");
+        msgEl.style.color = "red";
+        // console.log(msgEl);
+        if (answerButtonEL.getAttribute("data-answered") === "Correct") {
+            blnCorrect = true;
+            msgEl.style.color = "green";
+            numberCorrectAnswers++;
+        } else {
+            // incorrect answer, penalize them 15 second
+            secondsLeft -= 15;
+            checkTimeRemaining();
 
-            }
-        
-            questionIndex++;
-            renderQuestions();
-        };
-    });
-
+        }
+        // alert("loading next question idxQuestion is"+idxQuestion);
+        // load the next question
+        questionIndex++;
+        renderQuestions();
+    }
 };
 
 var setTime = function () {
