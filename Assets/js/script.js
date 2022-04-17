@@ -68,6 +68,7 @@ var finalScore = 0;
 //question Index
 var questionIndex = 0;
 var blnCorrect = false;
+var blnFinalQuestion = false;
 
 
 // start quiz function, should include an event listener
@@ -196,6 +197,7 @@ var setStorage = function () {
 
 // save data in local storage for displaying on the HIGH SCORES Page
 startQuiz();
+setTime();
 
 
 // document.querySelector("#answers").addEventListener("click", function (event) {
