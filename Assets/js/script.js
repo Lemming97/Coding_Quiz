@@ -122,29 +122,33 @@ var renderQuestions = function () {
             console.log('test');
 
             // checkCorrectAnswer();
-            for (let i = 0; i < answer.length; index++) {
-                var rightAnswer = questions.correctAnswer;
-                console.log("test");
-                if (question.answers[i] === rightAnswer) {
+            for (let i = 0; i < answer.length; i++) {
+                console.log("testing 2nd for loop");
+                // var rightAnswer = questions.correctAnswer;
+                var correctAnswer = answer[i];
+                if (question.answers[i] === correctAnswer) {
+                    console.log(correctAnswer);
                     btnCorrect = true;
-                    var CheckAnTextEL = document.createElement('p');
+                    var CheckAnTextEL = document.createElement("div");
                     CheckAnTextEL = document.querySelector(".result");
-                    CheckAnTextEL.style.color = "green";
                     CheckAnTextEL.textContent = "Yes";
                     document.body.appendChild(CheckAnTextEL);
+                    CheckAnTextEL.setAttribute("style", "color: green;");
                     numberCorrectAnswers++;
 
 
-                } else if (question.answers[i] != rightAnswer) {
+                } else if (question.answers[i] != correctAnswer) {
+                    console.log(correctAnswer);
                     btnCorrect = false;
-                    var CheckAnTextEL = document.createElement('p');
+                    var CheckAnTextEL = document.createElement("div");
                     CheckAnTextEL = document.querySelector(".result");
-                    CheckAnTextEL.style.color = "red";
                     CheckAnTextEL.textContent = "No!";
                     document.body.appendChild(CheckAnTextEL);
+                    CheckAnTextEL.setAttribute("style", "color: red;");
                     secondsLeft -= 15;
                     checkTimeRemaining();
                 } else {
+                    console.log(correctAnswer);
                     questionIndex++;
                     renderQuestions();
                 }
