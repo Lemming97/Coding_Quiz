@@ -57,7 +57,6 @@ var timerInterval;
 
 // body elements 
 var body = document.body;
-var msgEl = document.querySelector(".result");
 var checkElement = document.querySelector(".check-answer");
 
 // question scoring
@@ -121,23 +120,32 @@ var renderQuestions = function () {
         infoEl.appendChild(answerButtonEL);
         answerButtonEL.addEventListener('click', function () {
             console.log('test');
+
             // checkCorrectAnswer();
-            for (let i = 0; i < answers.length; index++) {
-                var rightAnswer = questions[questionIndex].correctAnswer;
-                console.log(correctAnswer);
-                if (question.answer === correctAnswer) {
+            for (let i = 0; i < answer.length; index++) {
+                var rightAnswer = questions.correctAnswer;
+                console.log("test");
+                if (question.answers[i] === rightAnswer) {
                     btnCorrect = true;
-                    msgEl.style.color = "green";
+                    var CheckAnTextEL = document.querySelector('.result');
+
+                    CheckAnTextEL.textContent = "Yes";
+                    CheckAnTextEL.style.color = "green";
                     numberCorrectAnswers++;
 
-                } else if (question.answer != correctAnswer) {
-                    msgEl.style.color = "red";
+
+                } else if (question.answers[i] != rightAnswer) {
+                    btnCorrect = false;
+                    var CheckAnTextEL = document.querySelector('.result');
+                    CheckAnTextEL.textContent = "No!";
+                    CheckAnTextEL.style.color = "red";
                     secondsLeft -= 15;
                     checkTimeRemaining();
+                } else {
+                    questionIndex++;
+                    renderQuestions();
                 }
 
-                questionIndex++;
-                renderQuestions();
 
             }
 
