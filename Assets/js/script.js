@@ -127,18 +127,21 @@ var renderQuestions = function () {
                 console.log("test");
                 if (question.answers[i] === rightAnswer) {
                     btnCorrect = true;
-                    var CheckAnTextEL = document.querySelector('.result');
-
-                    CheckAnTextEL.textContent = "Yes";
+                    var CheckAnTextEL = document.createElement('p');
+                    CheckAnTextEL = document.querySelector(".result");
                     CheckAnTextEL.style.color = "green";
+                    CheckAnTextEL.textContent = "Yes";
+                    document.body.appendChild(CheckAnTextEL);
                     numberCorrectAnswers++;
 
 
                 } else if (question.answers[i] != rightAnswer) {
                     btnCorrect = false;
-                    var CheckAnTextEL = document.querySelector('.result');
-                    CheckAnTextEL.textContent = "No!";
+                    var CheckAnTextEL = document.createElement('p');
+                    CheckAnTextEL = document.querySelector(".result");
                     CheckAnTextEL.style.color = "red";
+                    CheckAnTextEL.textContent = "No!";
+                    document.body.appendChild(CheckAnTextEL);
                     secondsLeft -= 15;
                     checkTimeRemaining();
                 } else {
