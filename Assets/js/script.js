@@ -86,6 +86,7 @@ var startQuiz = function () {
     document.querySelector(".intoText").appendChild(startButtonEl);
 
     startButtonEl.addEventListener("click", renderQuestions);
+    startButtonEl.addEventListener("click", setTime);
 
 };
 //render questions
@@ -230,7 +231,7 @@ var setStorage = function () {
 
 // save data in local storage for displaying on the HIGH SCORES Page
 startQuiz();
-setTime();
+
 
 
 // document.querySelector("#answers").addEventListener("click", function (event) {
