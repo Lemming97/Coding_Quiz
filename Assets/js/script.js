@@ -55,9 +55,11 @@ var timeEl = document.getElementById("timer");
 var secondsLeft = 80;
 var timerInterval;
 
+
 // body elements 
 var body = document.body;
-var checkElement = document.querySelector(".check-answer");
+var checkElement = document.querySelector('#check-answer');
+var StartQuizParent = document.querySelector('#StartQuiz');
 
 // question scoring
 var numberCorrectAnswers = 0;
@@ -118,37 +120,41 @@ var renderQuestions = function () {
         answerButtonEL.className = 'answer-btn';
         answerButtonEL.style.margin = '12px';
         infoEl.appendChild(answerButtonEL);
-        answerButtonEL.addEventListener('click', function () {
-            console.log('test');
-
+        answerButtonEL.addEventListener('click', function (event) {
+            //check which button was clicked and compare to correct answer
+            var answerIndex = event.target.parentElement.getAttribute('data-index');
+            // console.log(infoEl.getAttribute("value"));
+            //console.log(answerIndex);
             // checkCorrectAnswer();
-            for (let i = 0; i < answer.length; i++) {
-                console.log("testing 2nd for loop");
-                // var rightAnswer = questions.correctAnswer;
+            // StartQuizParent.textContent = " ";
+            console.log(correctAnswer);
+            for (let j = 0; j < answer.length; j++) {
+                //console.log("testing 2nd for loop");
+                var rightAnswer = questions.correctAnswer;
                 var correctAnswer = answer[i];
                 if (question.answers[i] === correctAnswer) {
                     console.log(correctAnswer);
                     btnCorrect = true;
-                    var CheckAnTextEL = document.createElement("div");
-                    CheckAnTextEL = document.querySelector(".result");
-                    CheckAnTextEL.textContent = "Yes";
-                    document.body.appendChild(CheckAnTextEL);
+                    var CheckAnTextEL = document.createElement('div');
+                    CheckAnTextEL = document.querySelector('#result');
+                    CheckAnTextEL.textContent = 'Yes';
+                    body.appendChild(CheckAnTextEL);
                     CheckAnTextEL.setAttribute("style", "color: green;");
                     numberCorrectAnswers++;
 
 
                 } else if (question.answers[i] != correctAnswer) {
-                    console.log(correctAnswer);
+                    //console.log(correctAnswer);
                     btnCorrect = false;
-                    var CheckAnTextEL = document.createElement("div");
-                    CheckAnTextEL = document.querySelector(".result");
-                    CheckAnTextEL.textContent = "No!";
-                    document.body.appendChild(CheckAnTextEL);
+                    var CheckAnTextEL = document.createElement('div');
+                    CheckAnTextEL = document.querySelector('#result');
+                    CheckAnTextEL.textContent = 'No';
+                    body.appendChild(CheckAnTextEL);
                     CheckAnTextEL.setAttribute("style", "color: red;");
                     secondsLeft -= 15;
                     checkTimeRemaining();
                 } else {
-                    console.log(correctAnswer);
+                    // console.log(correctAnswer);
                     questionIndex++;
                     renderQuestions();
                 }
@@ -215,20 +221,17 @@ var displayScores = function () {
     if (!secondsLeft > 0) {
         secondsLeft = 0;
     }
-
-    // var finalscore = 0;
-    // had scope issues, made global for now
-    finalscore = 0;
+    finalScore = 0;
     if (numCorrectAnswers > 0) {
 
-        finalscore = Math.round(100 * (numberCorrectAnswers / numberTotalQuestions) + (0.2 * secondsLeft));
-        if (finalscore > 100) {
-            finalscore = 100;
+        finalScore = Math.round(100 * (numberCorrectAnswers / numberTotalQuestions) + (0.2 * secondsLeft));
+        if (finalScore > 100) {
+            finalScore = 100;
         }
     }
-    console.log("note: Total questions= " + numberTotalQuestions + "\n correct answers= " + numberCorrectAnswers + "\n seconds left= " + secondsLeft + "\n final score= " + finalscore);
+    console.log("note: Total questions= " + numberTotalQuestions + "\n correct answers= " + numberCorrectAnswers + "\n seconds left= " + secondsLeft + "\n final score= " + finalScore);
 
-    document.querySelector("#msgScore").textContent = "Your final score is " + finalscore;
+    document.querySelector("#msgScore").textContent = "Your final score is " + finalScore;
 
 
 };
