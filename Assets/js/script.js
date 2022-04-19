@@ -18,19 +18,21 @@ var timerInterval;
 
 var setTime = function () {
     timerInterval = setInterval(function () {
-        secondsLeft--;
+        // secondsLeft--;
 
         if (secondsLeft === 0) {
             clearInterval(timerInterval);
-            endQuiz();
+            endQuiz(); // this function is not working
         }
         timeEl.textContent = "Time: " + secondsLeft.toString().padStart(2, '0');
         checkTimeRemaining();
+        secondsLeft--;
 
 
     }, 1000);
 
 };
+
 
 // body elements 
 var body = document.body;
