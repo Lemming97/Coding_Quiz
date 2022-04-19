@@ -20,13 +20,13 @@ var setTime = function () {
     timerInterval = setInterval(function () {
         secondsLeft--;
 
-        if (!secondsLeft > 0) {
-            secondsLeft = 1;
+        if (secondsLeft === 0) {
+            clearInterval(timerInterval);
             endQuiz();
-
         }
         timeEl.textContent = "Time: " + secondsLeft.toString().padStart(2, '0');
         checkTimeRemaining();
+
 
     }, 1000);
 
@@ -111,12 +111,13 @@ var renderQuestions = function () {
                 document.body.appendChild(CheckAnTextEL);
                 CheckAnTextEL.setAttribute("style", "color: red;");
                 secondsLeft -= 15;
-                // checkTimeRemaining();
-            } else {
-
-                questionIndex++;
-                renderQuestions();
+                
             }
+
+            questionIndex++;
+            // answer;
+            renderQuestions();
+
         })
     };
 
@@ -155,7 +156,7 @@ var checkTimeRemaining = function () {
 var endQuiz = function () {
     if (questionIndex >= questions.length) {
         // All done will append last page with user stats
-        createDiv.textContent = "End of quiz!" ;
+        createDiv.textContent = "End of quiz!";
         // + " " + "You got  " + score + "/" + questions.length + " Correct!";
     } else {
         questionIndex++;
@@ -184,6 +185,11 @@ var endQuiz = function () {
 //     document.querySelector("#msgScore").textContent = "Your final score is " + finalscore;
 
 // };
+
+
+
+
+
 //local storage
 initialSubmitBtn.addEventListener("click", function (event) {
     event.preventDefault();
