@@ -21,7 +21,9 @@ var setTime = function () {
         secondsLeft--;
 
         if (!secondsLeft > 0) {
-            secondsLeft = 0;
+            secondsLeft = 1;
+            endQuiz();
+
         }
         timeEl.textContent = "Time: " + secondsLeft.toString().padStart(2, '0');
         checkTimeRemaining();
@@ -36,6 +38,7 @@ var checkElement = document.querySelector('#check-answer');
 var StartQuizParent = document.querySelector('#StartQuiz');
 var initialInput = document.querySelector('#initials');
 var initialSubmitBtn = document.querySelector('#submitBtn');
+var createDiv = document.querySelector("#end-quiz");
 
 // question scoring
 var numberCorrectAnswers = 0;
@@ -92,7 +95,7 @@ var renderQuestions = function () {
                 btnCorrect = true;
                 var CheckAnTextEL = document.createElement("div");
                 CheckAnTextEL = document.querySelector("#result");
-                CheckAnTextEL.textContent = "Yes";
+                CheckAnTextEL.textContent = "Correct";
                 document.body.appendChild(CheckAnTextEL);
                 CheckAnTextEL.setAttribute("style", "color: green;");
                 numberCorrectAnswers++;
@@ -104,7 +107,7 @@ var renderQuestions = function () {
                 btnCorrect = false;
                 var CheckAnTextEL = document.createElement("div");
                 CheckAnTextEL = document.querySelector("#result");
-                CheckAnTextEL.textContent = "No!";
+                CheckAnTextEL.textContent = "Incorrect!";
                 document.body.appendChild(CheckAnTextEL);
                 CheckAnTextEL.setAttribute("style", "color: red;");
                 secondsLeft -= 15;
@@ -143,23 +146,23 @@ startButtonEl.addEventListener('click', startQuiz);
 
 var checkTimeRemaining = function () {
     if (secondsLeft <= 0 || btnFinalQuestion) {
-        // endQuiz();
         clearInterval(timerInterval);
+        endQuiz();
         // displayScores();}
 
     }
 };
-// var endQuiz = function () {
-//     if (questionIndex >= questions.length) {
-//         // All done will append last page with user stats
+var endQuiz = function () {
+    if (questionIndex >= questions.length) {
+        // All done will append last page with user stats
+        createDiv.textContent = "End of quiz!" ;
+        // + " " + "You got  " + score + "/" + questions.length + " Correct!";
+    } else {
+        questionIndex++;
+        renderQuestions();
+    }
 
-//         createDiv.textContent = "End of quiz!" + " " + "You got  " + score + "/" + questions.length + " Correct!";
-//     } else {
-//         questionIndex++;
-//         renderQuestions();
-//     }
-
-// };
+};
 // var displayScores = function () {
 //     document.querySelector("#msgQuizDone").textContent = "All done!";
 //     if (!secondsLeft > 0) {
