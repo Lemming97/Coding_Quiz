@@ -12,9 +12,23 @@ var questions = [{
 ];
 
 //timer
-var timeEl = document.getElementById('.timer');
+var timeEl = document.getElementById("timer");
 var secondsLeft = 80;
 var timerInterval;
+
+var setTime = function () {
+    timerInterval = setInterval(function () {
+        secondsLeft--;
+
+        if (!secondsLeft > 0) {
+            secondsLeft = 0;
+        }
+        timeEl.textContent = "Time: " + secondsLeft.toString().padStart(2, '0');
+        checkTimeRemaining();
+
+    }, 1000);
+
+};
 
 // body elements 
 var body = document.body;
@@ -37,6 +51,7 @@ var startButtonEl = document.querySelector("#buttonEl");
 
 //render questions
 var renderQuestions = function () {
+    setTime();
     // for (let i = 0; i < questions.length; i++) { // this runs once
     var intoTextEL = document.querySelector('.intoText');
     intoTextEL.style.display = 'none';
@@ -101,8 +116,7 @@ var renderQuestions = function () {
             }
         })
     };
-    // debugger;
-    //   answerButtonEL.addEventListener(click, compare);
+
 };
 // var checkCorrectAnswer = function () {
 //     console.log("test2");
@@ -113,6 +127,7 @@ var renderQuestions = function () {
 //             break;
 //     }
 // };
+
 var startQuiz = function () {
     //start button
     startButtonEl.textContent = "Start Quiz";
@@ -121,21 +136,11 @@ var startQuiz = function () {
     // body.appendChild(startButtonEl);
     document.querySelector(".intoText").appendChild(startButtonEl);
     renderQuestions();
-    startButtonEl.addEventListener("click", setTime);
+    // startButtonEl.addEventListener("click", setTime);
 };
 
 startButtonEl.addEventListener('click', startQuiz);
 
-var setTime = function () {
-    timerInterval = setInterval(function () {
-        secondsLeft--;
-        if (!secondsLeft > 0) {
-            secondsLeft = 0;
-        }
-        timeEl.textContent = "Time: " + secondsLeft.toString().padStart(2, '0');
-        checkTimeRemaining();
-    }, 1000);
-};
 var checkTimeRemaining = function () {
     if (secondsLeft <= 0 || btnFinalQuestion) {
         // endQuiz();
@@ -190,5 +195,3 @@ initialSubmitBtn.addEventListener("click", function (event) {
     console.log(test.initialInput);
 
 });
-
-
