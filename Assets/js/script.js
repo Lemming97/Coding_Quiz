@@ -40,7 +40,9 @@ var checkElement = document.querySelector('#check-answer');
 var StartQuizParent = document.querySelector('#StartQuiz');
 var initialInput = document.querySelector('#initials');
 var initialSubmitBtn = document.querySelector('#submitBtn');
-var createDiv = document.querySelector("#end-quiz");
+// var createDiv = document.querySelector("#end-quiz");
+var createDiv = document.querySelector('h1');
+var questionsEL = document.querySelector('#questions');
 
 // question scoring
 var numberCorrectAnswers = 0;
@@ -50,7 +52,7 @@ var btnCorrect = false;
 var btnFinalQuestion = false;
 
 //question Index
-var questionIndex = 0;
+var questionIndex = 0; // this is equal to i
 var startButtonEl = document.querySelector("#buttonEl");
 // start quiz function, should include an event listener
 
@@ -60,65 +62,72 @@ var renderQuestions = function () {
     // for (let i = 0; i < questions.length; i++) { // this runs once
     var intoTextEL = document.querySelector('.intoText');
     intoTextEL.style.display = 'none';
-    var question = questions[questionIndex];
+    // var question = questions[questionIndex];
     var h2El = document.createElement('h2');
-    h2El.textContent = question.title;
+    // h2El.textContent = question.title;
     document.body.appendChild(h2El);
+    // questionsEL.appendChild(h2El);
     answersEL = document.createElement('ol');
     answersEL.className = 'answers';
-    document.body.appendChild(answersEL);
-    for (let i = 0; i < question.answers.length; i++) {
+    // document.body.appendChild(answersEL);
+
+
+    for (let i = 0; i < questions.length; i++) {
+
         //single question in the for loop, this runs twice because we have 2 objects in the 1 array
+        var question = questions[i];
+        h2El.textContent = question.title;
         var answer = question.answers[i];
         var correctAnswer = question.correctAnswer;
         var infoEl = document.createElement('li');
-        // infoEl.setAttribute('data-index', i);
         infoEl.setAttribute('value', answer);
+
         //buttons for answers
         infoEl.textContent = answer;
+        document.body.appendChild(answersEL);
         document.body.appendChild(infoEl);
-        // var answerButtonEL = document.createElement('button');
-        // answerButtonEL.textContent = 'Select';
-        // answerButtonEL.className = 'answer-btn';
-        // answerButtonEL.style.margin = '12px';
-        // infoEl.appendChild(answerButtonEL);
+
 
         infoEl.addEventListener('click', function (event) {
 
-            // checkCorrectAnswer()
-            // var rightAnswer = questions.correctAnswer;
+            i.answer.forEach(function (answer, i) {
+                if (correctAnswer === event.target.textContent) {
+                    // console.log(event.target);
+                    // console.log(event.target.value);
+                    // console.log('Correct!');
+                    // console.log(event.target.textContent);
+                    // console.log(correctAnswer);
+                    btnCorrect = true;
 
-            if (correctAnswer === event.target.textContent) {
-                console.log(event.target);
-                console.log(event.target.value);
-                console.log('Correct!');
-                console.log(event.target.textContent);
-                console.log(correctAnswer);
-                btnCorrect = true;
-                var CheckAnTextEL = document.createElement("div");
-                CheckAnTextEL = document.querySelector("#result");
-                CheckAnTextEL.textContent = "Correct";
-                document.body.appendChild(CheckAnTextEL);
-                CheckAnTextEL.setAttribute("style", "color: green;");
-                numberCorrectAnswers++;
-            } else if (correctAnswer != event.target.textContent) {
-                console.log(event.target.value);
-                console.log('Incorrect!');
-                console.log(event.target.textContent);
-                console.log(correctAnswer);
-                btnCorrect = false;
-                var CheckAnTextEL = document.createElement("div");
-                CheckAnTextEL = document.querySelector("#result");
-                CheckAnTextEL.textContent = "Incorrect!";
-                document.body.appendChild(CheckAnTextEL);
-                CheckAnTextEL.setAttribute("style", "color: red;");
-                secondsLeft -= 15;
-                
-            }
+                    var CheckAnTextEL = document.createElement("div");
+                    CheckAnTextEL = document.querySelector("#result");
+                    CheckAnTextEL.textContent = "Correct";
+                    document.body.appendChild(CheckAnTextEL);
+                    CheckAnTextEL.setAttribute("style", "color: green;");
+                    numberCorrectAnswers++;
+                    // h2El.innerHTML = "";
+                } else if (correctAnswer != event.target.textContent) {
+                    // console.log(event.target.value);
+                    // console.log('Incorrect!');
+                    // console.log(event.target.textContent);
+                    // console.log(correctAnswer);
+                    btnCorrect = false;
+                    var CheckAnTextEL = document.createElement("div");
+                    CheckAnTextEL = document.querySelector("#result");
+                    CheckAnTextEL.textContent = "Incorrect!";
+                    document.body.appendChild(CheckAnTextEL);
 
-            questionIndex++;
-            // answer;
-            renderQuestions();
+                    CheckAnTextEL.setAttribute("style", "color: red;");
+                    secondsLeft -= 15;
+                    checkTimeRemaining();
+                    // h2El.innerHTML = "";
+
+                } else {
+                    // h2El.innerHTML = "";
+                    questionIndex++;
+                    renderQuestions();
+                }
+            })
 
         })
     };
@@ -156,14 +165,21 @@ var checkTimeRemaining = function () {
     }
 };
 var endQuiz = function () {
+    questionIndex = questions.length;
+
     if (questionIndex >= questions.length) {
         // All done will append last page with user stats
+        document.querySelector('ol').textContent = "";
+        document.querySelector('li').textContent = "";
+
         createDiv.textContent = "End of quiz!";
+        document.body.appendChild(createDiv);
         // + " " + "You got  " + score + "/" + questions.length + " Correct!";
-    } else {
-        questionIndex++;
-        renderQuestions();
     }
+    // else {
+    //     // questionIndex++;
+    //     // renderQuestions();
+    // }
 
 };
 // var displayScores = function () {
