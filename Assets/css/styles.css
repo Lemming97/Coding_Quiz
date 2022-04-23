@@ -1,10 +1,62 @@
+/*Custome Style sheet designed by Lindsey Martin*/
+* {
+    margin: 555;
+    padding: 555;
+    box-sizing: border-box;
+}
+
+:root {
+    /*main colors */
+    --primary-color: #4F705F;
+    --secondary-color: #7BB095;
+    --tertiary-color: #B1FCD5;
+}
+
 .hide {
     display: none;
-  }
+}
 
-  .answers button {
+body {
+    font-family: 'Open Sans', sans-serif;
+
+}
+
+
+.whole-quiz-body {
+align-content: center;
+}
+
+
+button {
+    background-color: #96D6B5;
+    vertical-align: middle;
     display: block;
+    border-radius: 15px;
     padding: 10px;
     margin-bottom: 5px;
-  }
-  
+    font-family: 'Open Sans', sans-serif;
+}
+
+button:hover {
+    background: #4F705F;
+    color: #D5F2EA;
+    border-radius: 15px;
+    text-shadow: none;
+    font-family: 'Open Sans', sans-serif;
+}
+
+
+a {
+    color: #4F705F;
+    float: right;
+
+}
+a:hover {
+    color: #96D6B5;
+}
+
+.timer {
+    color: #4F705F;
+    float: right;
+
+}
