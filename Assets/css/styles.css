@@ -1,10 +1,120 @@
+/*Custome Style sheet designed by Lindsey Martin*/
+* {
+    margin: 555;
+    padding: 555;
+    box-sizing: border-box;
+}
+
+:root {
+    /*main colors */
+    --primary-color: #4F705F;
+    --secondary-color: #7BB095;
+    --tertiary-color: #B1FCD5;
+}
+
 .hide {
     display: none;
-  }
+}
 
-  .answers button {
+body {
+
+    font-family: 'Open Sans', sans-serif;
+
+}
+
+h1 {
+    color: #4F705F;
+}
+
+h4 {
+    color: #4F705F;
+}
+
+
+#whole-quiz-body,
+#end-quiz {
+    margin: 0 auto;
+    width: 150px;
+    align-items: center;
+}
+
+#startQuizBtn {
+    margin-top: 10 px;
+    display: inline-block;
+}
+
+#answers {
+    align-items: center;
+
+}
+
+button {
+    align-items: center;
+    justify-content: space-between;
+    background-color: #96D6B5;
     display: block;
-    padding: 10px;
+    border-radius: 12px;
+    padding: 5px;
     margin-bottom: 5px;
-  }
-  
+    font-family: 'Open Sans', sans-serif;
+}
+
+button:hover {
+    background: #4F705F;
+    color: #D5F2EA;
+    border-radius: 12px;
+    text-shadow: none;
+    font-family: 'Open Sans', sans-serif;
+}
+
+#scoresBTN button {
+    display: inline-block;
+}
+
+#answers>button:nth-child(1) {
+    display: flex;
+}
+
+#initials {
+    padding: 5px;
+    margin-bottom: 5px;
+}
+
+#submitBtn {
+    margin: 0 auto;
+    width: 100px;
+    padding: 5px;
+    margin-bottom: 5px;
+    display: block;
+}
+
+a {
+    color: #4F705F;
+    float: right;
+
+}
+
+a:hover {
+    color: #96D6B5;
+}
+
+.timer {
+    float: right;
+    position: absolute;
+    top: 10px;
+
+}
+
+.start {
+    text-align: center;
+}
+
+.HS-container {
+    margin: 0 auto;
+    width: 350px;
+    align-items: center;
+
+}
+#scoresBTN {
+    display: inline-block;
+}

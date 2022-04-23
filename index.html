@@ -10,13 +10,13 @@
 </head>
 
 <body>
-    <div class="row p-1 mx-1">
+    <div class="row">
         <div class="scores">
             <h4 id="highscores">
                 <a href="highscores.html" class="view_scores" style="text-decoration: none;">View High Scores</a>
             </h4>
         </div>
-        <div class="justify-content-end float-right">
+        <div class="time">
             <h4 id="timer">Time: 80</h4>
         </div>
     </div>
@@ -52,24 +52,24 @@
                     <p id="check-answer"></p>
                 </div>
             </div>
-        </section>
-
-        <!-- final score -->
-        <section id="end-quiz" class="hide">
-            <div class="row p-1">
-                <div class="input-group">
-                    <h2>End of Quiz!</h2>
-                    <p>Your final score is <span id="final-score"></span></p>
-                    <label for="YourInitials">Enter initials:</label>
-                    <input type="text" name="name" id="initials" placeholder="J.D." />
-                    <button type="submit" onclick="saveHighScore()" class="btn btn-primary btn-sm" id="submitBtn"
-                        onclick="saveHighScore()">Submit</button>
-                </div>
-            </div>
-        </section>
-        <!-- quiz answer results  -->
-        <div id="result" class="result hide"></div>
+            <!-- quiz answer results  -->
+            <div id="result" class="result hide"></div>
     </div>
+    </section>
+
+    <!-- final score -->
+    <section id="end-quiz" class="hide">
+        <div class="row p-1">
+            <div class="input-group">
+                <h2>End of Quiz!</h2>
+                <p>Your final score is <span id="final-score"></span></p>
+                <label for="YourInitials">Enter initials:</label>
+                <input type="text" name="name" id="initials" placeholder="J.D." />
+                <button type="submit" onclick="saveHighScore()" class="btn btn-primary btn-sm" id="submitBtn"
+                    onclick="saveHighScore()">Submit</button>
+            </div>
+        </div>
+    </section>
     </section>
 
 
