@@ -90,7 +90,8 @@ var renderQuestions = function () {
 
         infoEl.addEventListener('click', function (event) {
 
-            i.answer.forEach(function (answer, i) {
+            i.question.forEach(function (question, i) {
+                console.log("test")
                 if (correctAnswer === event.target.textContent) {
                     // console.log(event.target);
                     // console.log(event.target.value);
