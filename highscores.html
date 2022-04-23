@@ -16,11 +16,11 @@
                 <h1>High Scores</h1>
             </div>
         </div>
-        <div class="row">
-            <div class="col-6">
-                <ol id="scoreList" class="bg-white">
-                </ol>
-            </div>
+        <div class="wrapper">
+            <span id="scoreText">
+            </span>
+            <ol id="highScores"></ol>
+
 
         </div>
         <div class="row p-1">
@@ -32,10 +32,88 @@
     </div>
 
     <script>
+        var scoreTextEl = document.querySelector("#scoreText");
+        scoreTextEl.textContent = "Quiz yourself to see the High Score!";
+
+
+        // go back button to main page
         document.getElementById("btnBack").onclick = function (event) {
-            // alert("link back to index.html here");
             document.location.href = "index.html";
         }
+
+        // clear high scores button button
+        document.getElementById("btnClear").onclick = function (event) {
+            scoreTextEl.textContent = "";
+            localStorage.removeItem("highScores");
+            console.log("testing button click");
+            highScores.textContent = "All High Scores have been Cleared!";
+
+
+
+        }
+
+        function displayHighScores() {
+
+
+            // either get scores from local storage or set to empty array
+            var highScores = JSON.parse(window.localStorage.getItem("highScores")) || [];
+
+            // sort high scores by score property in descending order
+            highScores.sort(function (a, b) {
+                return b.score - a.score;
+            });
+
+            highScores.forEach(function (score) {
+                // create li tag for each high score
+                var liEl = document.createElement("li");
+                liEl.textContent = score.userInitials + " - " + score.score;
+
+                // display on page
+                var olEl = document.getElementById("highScores");
+                olEl.appendChild(liEl);
+
+            });
+        }
+
+        // need logic to display high scores here
+
+        // var displayHighScores = function () {
+        // finalScoreEl.innerHTML = "";
+        // show(highScoresEl);
+
+        // // either get scores from local storage or set to empty array
+        // var highScores = JSON.parse(window.localStorage.getItem("userScore"));
+
+
+        // for (let i = 0; i < highScores.length; i++) {
+        //     let scoreItem = document.createElement("li");
+        //     scoreItem.className += "row mb-3 p-2";
+        //     console.log(scoreItem)
+
+        //     scoreItem.textContent = `${(i + 1)}. ${highScores[i].username} - ${highScores[i].userScore}`;
+        //     highScoresEl.appendChild(scoreItem);
+        // }
+        // };
+
+
+
+        // // sort high scores by score property in descending order
+        // highScores.sort(function (a, b) {
+        //     return b.score - a.score;
+        // });
+
+        // highScores.forEach(function (score) {
+        //     // create li tag for each high score
+        //     var liTag = document.createElement("li");
+        //     liTag.textContent = score.initials + " - " + score.score;
+
+        //     // display on page
+        //     var olEl = document.querySelector("#highScores");
+        //     olEl.appendChild(liTag);
+        // // });
+
+        // // run function when page loads
+        displayHighScores();
     </script>
 </body>
 
