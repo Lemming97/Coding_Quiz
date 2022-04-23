@@ -1,4 +1,4 @@
-/*Custome Style sheet designed by Lindsey Martin*/
+/*Custom Style sheet designed by Lindsey Martin*/
 * {
     margin: 555;
     padding: 555;
@@ -34,11 +34,12 @@ h4 {
 #whole-quiz-body,
 #end-quiz {
     margin: 0 auto;
-    width: 150px;
+    width: 250px;
     align-items: center;
 }
 
 #startQuizBtn {
+    font-size: 20px;
     margin-top: 10 px;
     display: inline-block;
 }
@@ -49,6 +50,8 @@ h4 {
 }
 
 button {
+    width: auto;
+    font-size: 15px;
     align-items: center;
     justify-content: space-between;
     background-color: #96D6B5;
@@ -66,8 +69,11 @@ button:hover {
     text-shadow: none;
     font-family: 'Open Sans', sans-serif;
 }
-
+#quiz-title {
+    align-items: center;
+}
 #scoresBTN button {
+
     display: inline-block;
 }
 
@@ -115,6 +121,7 @@ a:hover {
     align-items: center;
 
 }
-#scoresBTN {
+#btnBack, #btnClear  {
+    font-size: 16px;
     display: inline-block;
 }
