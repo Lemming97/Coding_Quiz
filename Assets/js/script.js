@@ -46,8 +46,6 @@ var setTime = function () {
 
         timeEl.textContent = "Time: " + secondsLeft.toString().padStart(2, '0');
         checkTimeRemaining();
-        // secondsLeft--;
-
 
     }, 1000);
 
