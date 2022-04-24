@@ -12,7 +12,7 @@ var questions = [{
         title: "Arrays in JavaScript can be used to store",
         answers: ["numbers and strings", "other arrays", "booleans", "all of the above"],
         correctAnswer: "all of the above"
-    }, 
+    },
     {
         title: "String values must be enclosed within ___ when being assigned to variables.",
         answers: ["commas", "curly brackets", "quotes", "parenthesis"],
@@ -44,10 +44,6 @@ var setTime = function () {
     timerInterval = setInterval(function () {
         secondsLeft--;
 
-        // if (secondsLeft === 0) {
-        //     clearInterval(timerInterval);
-        //     endQuiz(); // this function is not working
-        // }
         timeEl.textContent = "Time: " + secondsLeft.toString().padStart(2, '0');
         checkTimeRemaining();
         // secondsLeft--;
@@ -67,23 +63,15 @@ var checkTimeRemaining = function () {
 //question Index
 var questionIndex = 0; // this is equal to i
 
-// question scoring
-// var numberCorrectAnswers = 0;
-// var numberTotalQuestions = 0;
-// var finalScore = 0;
-// var btnCorrect = false;
-// var btnFinalQuestion = false;
-
 //body elements
 var wholeQuizBodyEl = document.querySelector("#whole-quiz-body");
 var quizBodyEl = document.querySelector("#quiz-body");
 var quizTitleEl = document.querySelector("#quiz-title");
 var quizAnsEl = document.querySelector("#answers");
-// var startTextEL = document.querySelector(".start");
+
 var initialInputEL = document.querySelector('#initials'); //input field for initials 
 var initialSubmitBtn = document.querySelector('#submitBtn'); // save high scores
 var startQuizBtnEl = document.querySelector("#startQuizBtn");
-// var createDiv = document.querySelector('h1');
 
 
 
@@ -108,7 +96,7 @@ var startQuiz = function () {
 }
 
 var renderQuestions = function () {
-    // setTime();
+
     // get current question object from array
     var displayNewQuestion = questions[questionIndex];
 
@@ -177,63 +165,6 @@ var questionSelections = function () {
 
 
 
-// var questionSelections = function() {
-//     // var question = questionIndex[i];
-//     var correctAnswer = questionIndex.correctAnswer;
-//     var infoEl = document.createElement('li');
-
-//     infoEl.addEventListener('click', function (event) {
-//         // check if user guessed wrong
-//         if (correctAnswer != event.target.textContent) {
-//             CheckAnTextEL.textContent = "Incorrect!";
-//             document.body.appendChild(CheckAnTextEL);
-//             CheckAnTextEL.setAttribute("style", "color: red;");
-//             secondsLeft -= 15;
-//             checkTimeRemaining();
-
-//             if (secondsLeft < 0) {
-//                 secondsLeft = 0;
-//             }
-//             // display new time on page
-//             timerEl.textContent = secondsLeft;
-//             CheckAnTextEL.textContent = "Incorrect!";
-//             CheckAnTextEL.style.color = "red";
-//             CheckAnTextEL.style.fontSize = "150%";
-
-//         } else if (correctAnswer === event.target.textContent) {
-//             // check if user guessed correctly
-//             btnCorrect = true;
-//             var CheckAnTextEL = document.createElement("div");
-//             CheckAnTextEL = document.querySelector("#result");
-//             CheckAnTextEL.textContent = "Correct";
-//             document.body.appendChild(CheckAnTextEL);
-//             CheckAnTextEL.setAttribute("style", "color: green;");
-//             // numberCorrectAnswers++;
-//             CheckAnTextEL.textContent = "Correct!";
-//             CheckAnTextEL.style.color = "green";
-//             CheckAnTextEL.style.fontSize = "150%";
-//         }
-
-//         // flash Correct/Incorrect feedback
-//         CheckAnTextEL.setAttribute("class", "feedback");
-//         setTimeout(function () {
-//             CheckAnTextEL.setAttribute("class", "feedback hide");
-//         }, 1000);
-
-//         // next question
-//         questionIndex++;
-
-//         // time checker
-//         if (questionIndex === questions.length - 1) {
-//             endQuiz();
-//         } else {
-//             renderQuestions();
-//         }
-//     })
-// };
-
-
-
 var endQuiz = function () {
     questionIndex = questions.length;
     // stop timer
@@ -248,10 +179,7 @@ var endQuiz = function () {
 
         var endScreenEl = document.querySelector("#end-quiz");
         endScreenEl.removeAttribute("class");
-        // All done will append last page with user stats
-        // document.querySelector('ol').textContent = "";
-        // createDiv.textContent = "End of quiz!";
-        // document.body.appendChild(createDiv);
+
         // show final score
         var finalScoreEl = document.querySelector("#final-score");
         finalScoreEl.textContent = secondsLeft;
@@ -262,40 +190,7 @@ var endQuiz = function () {
     }
 };
 
-// //local storage
-// initialSubmitBtn.addEventListener("click", function () {
-//     console.log("testing button");
-//     var saveScore = {
-//         initial: initialInputEL.value.trim(),
-//         score: secondsLeft
-//     };
-//     // set new submission to local storage 
-//     localStorage.setItem("saveScore", JSON.stringify(saveScore));
-//     // var test = JSON.parse(localStorage.getItem('saveScore'));
 
-//     // // redirect to next page
-//     // document.location.href = "highscores.html";
-//     document.location.href = "highscores.html";
-
-
-// });
-
-// // need logic to store multiple scores and listing them off 
-// // sorts of data you can represents =: string, number, boolean, object, array 
-// // push into an array, array.sort and array.slice/splice
-// // need access to previous high scores to save to new high scores -> get them from where they are store and modiy the list to store them again
-
-// // var saveHighScores = function () {
-// //     var highScores =
-// //         JSON.parse(window.localStorage.getItem("highScores")) || [];
-
-// //     // save to local storage
-// //     highScores.push(saveScore);
-// //     highScores.setItem("highScores", JSON.stringify(highScores));
-
-
-
-// // };
 var saveHighScore = function () {
     // get value of input box
     var userInitials = initialInputEL.value.trim();
@@ -330,4 +225,3 @@ initialSubmitBtn.addEventListener("click", function () {
 
 startQuizBtnEl.addEventListener('click', startQuiz);
 console.log("test");
-// saveHighScores();
