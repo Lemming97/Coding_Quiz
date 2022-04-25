@@ -215,9 +215,7 @@ var saveHighScore = function () {
 
 };
 
-initialSubmitBtn.addEventListener("click", function () {
-
-});
+// 
 
 
 
